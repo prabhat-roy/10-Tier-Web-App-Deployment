@@ -7,10 +7,17 @@ pipeline {
         K8S_MASTER_IP ="10.0.1.6"        
         nexus_cred = "nexus"
 	    NEXUS_IMAGE_URL = "${NEXUS_IP}:8082"
-        PRODUCT_IMAGE_NAME = "product-catalogue"
-        SHOPFRONT_IMAGE_NAME = "shopfront"
-        STOCKMANAGER_IMAGE_NAME = "stock-manager"
-        DOCKERHUB_NAME = "prabhatrkumaroy"
+        AD_SERVICE = "adservice"
+        CART_SERVICE = "cartservice"
+        CHECKOUT_SERVICE = "checkoutservice"
+        CURRENCY_SERVICE = "currencyservice"
+        EMAIL-SERVICE = "emailservice"
+        PAYMENT_SERVICE = "paymentservice"
+        PRODUCT_CATALOG_SERVICE = "productcatalogservice"
+        RECOMMENDATION_SERVICE = "recommendationservice"
+        SHIPPING_SERVICE = "shippingservice"
+        FRONTEND = "frontend"
+        LOAD_GENERATOR = "loadgenerator"
 		GITHUB_URL = "https://github.com/prabhat-roy/10-Tier-Web-App-Deployment.git"
     }
     tools {
@@ -60,10 +67,10 @@ pipeline {
                 }
             }
         }
-        stage("Docker build ad-service") {
+        stage("Docker build") {
             steps {
                 script {
-                    gv_script.adservice()
+                    gv_script.dockerbuild()
                 }
             }
         }
