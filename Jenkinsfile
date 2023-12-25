@@ -60,6 +60,13 @@ pipeline {
                 }
             }
         }
+        stage("Docker build ad-service") {
+            steps {
+                script {
+                    gv_script.ad-service()
+                }
+            }
+        }
     }
     post {
         always {
