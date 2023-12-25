@@ -149,8 +149,14 @@ def dockerrun() {
         docker run -dt  ${SHIPPING_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${FRONTEND}:${BUILD_NUMBER}
         docker run -dt  ${LOAD_GENERATOR}:${BUILD_NUMBER}
+        docker ps -aq | xargs docker stop
         '''
 }
 
 
+
+def removedocker() {
+                sh "docker system prune --force --all"
+                sh "docker system prune --force --all --volumes"
+}
 return this

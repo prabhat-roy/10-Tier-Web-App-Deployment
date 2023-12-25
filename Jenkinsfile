@@ -109,6 +109,13 @@ pipeline {
                 }
             }
         }
+        stage("Container Removal") {
+            steps {
+                script {
+                    gv_script.removedocker()
+                }
+            }
+        }
     }
     post {
         always {
