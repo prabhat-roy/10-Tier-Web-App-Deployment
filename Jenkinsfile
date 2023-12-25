@@ -11,7 +11,7 @@ pipeline {
         CART_SERVICE = "cartservice"
         CHECKOUT_SERVICE = "checkoutservice"
         CURRENCY_SERVICE = "currencyservice"
-        EMAIL-SERVICE = "emailservice"
+        EMAIL_SERVICE = "emailservice"
         PAYMENT_SERVICE = "paymentservice"
         PRODUCT_CATALOG_SERVICE = "productcatalogservice"
         RECOMMENDATION_SERVICE = "recommendationservice"
