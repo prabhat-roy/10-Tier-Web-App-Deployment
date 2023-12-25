@@ -8,7 +8,7 @@ def checkout() {
 
 def sonarqube() {
         withSonarQubeEnv('SonarQube') {
-                sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectkey=10-Tier -Dsonar.projectName=10Tier -Dsonar.java.binaries=."
+                sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=10-Tier -Dsonar.projectName=10Tier -Dsonar.java.binaries=."
         }
 }
 def owasp() {
