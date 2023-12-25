@@ -21,12 +21,12 @@ def trivyfs() {
 }
 
 def adservice() {
-        withDockerRegistry(credentialsId: 'nexus', toolName: 'docker', url: '$NEXUS_IMAGE_URL') {
+
                 dir('/root/workspace/10-tier-app/src/adservice') {
-                        sh "docker build . -t $NEXUS_IMAGE_URL/adservice:${BUILD_NUMBER}"
-                        sh "push $NEXUS_IMAGE_URL/adservice:${BUILD_NUMBER}"
+                        sh "docker build . -t ${NEXUS_IMAGE_URL}/adservice:${BUILD_NUMBER}"
+                        
                 }
         }
 
-}
+
 return this
