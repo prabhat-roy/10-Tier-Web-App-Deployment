@@ -2,6 +2,7 @@ def gv_script
 pipeline {
     agent { label 'Jenkins-Agent' }
     environment {
+        SCANNER_HOME = tool "sonar-scanner"
         NEXUS_IP = "10.0.1.9"	
         K8S_MASTER_IP ="10.0.1.6"        
         nexus_cred = "nexus"
@@ -38,14 +39,20 @@ pipeline {
                 }
             }
         }
-        stage("OWASP FS Scan") {
+        stage("SonarQube Scan") {
+            steps {
+                script {
+                    gv_script.sonarqube()
+                }
+            }
+        }
+          stage("OWASP FS Scan") {
             steps {
                 script {
                     gv_script.owasp()
                 }
             }
         }
-        
         stage("Trivy FS Scan") {
             steps {
                 script {

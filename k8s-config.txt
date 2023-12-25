@@ -1,0 +1,10 @@
+create a namespace
+kubectl create namespace webapp
+create service account
+kubectl apply -f service-account.yaml
+create a role
+kubectl apply -f role.yaml
+create role binding
+kubectl apply -f role-binding.yaml
+create a secret
+kubectl apply -f secret.yaml -n webapp
