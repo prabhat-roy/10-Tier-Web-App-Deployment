@@ -21,12 +21,12 @@ def trivyfs() {
 }
 
 def adservice() {
-
-                dir('/root/workspace/10-tier-app/src/adservice') {
-                        sh "docker build . -t ${NEXUS_IMAGE_URL}/adservice:${BUILD_NUMBER}"
-                        
+        dir('/root/workspace/10-tier-app/src/adservice') {
+                sh "docker build . -t ${NEXUS_IMAGE_URL}/adservice:${BUILD_NUMBER}"
                 }
-        }
-
+        dir('/root/workspace/10-tier-app/src/cartservice/src') {
+                sh "docker build . -t ${NEXUS_IMAGE_URL}/cartservice:${BUILD_NUMBER}"
+         }
+}
 
 return this
