@@ -53,4 +53,18 @@ def dockerbuild() {
         }
 }
 
+def trivyimage() {
+        sh '''
+        trivy image ${NEXUS_IMAGE_URL}/${AD_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${CART_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${CURRENCY_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${EMAIL_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${PAYMENT_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${RECOMMENDATION_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${SHIPPING_SERVICE}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${FRONTEND}:${BUILD_NUMBER}
+        trivy image ${NEXUS_IMAGE_URL}/${LOAD_GENERATOR}:${BUILD_NUMBER}
+        '''
+}
 return this

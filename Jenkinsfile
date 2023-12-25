@@ -2,11 +2,12 @@ def gv_script
 pipeline {
     agent { label 'Jenkins-Agent' }
     environment {
-        SCANNER_HOME = tool "sonar-scanner"
         NEXUS_IP = "10.0.1.9"	
-        K8S_MASTER_IP ="10.0.1.6"        
+        K8S_MASTER_IP ="10.0.1.6"
+        GITHUB_URL = "https://github.com/prabhat-roy/10-Tier-Web-App-Deployment.git"        
         nexus_cred = "nexus"
 	    NEXUS_IMAGE_URL = "${NEXUS_IP}:8082"
+        SCANNER_HOME = tool "sonar-scanner"
         AD_SERVICE = "adservice"
         CART_SERVICE = "cartservice"
         CHECKOUT_SERVICE = "checkoutservice"
@@ -18,8 +19,7 @@ pipeline {
         SHIPPING_SERVICE = "shippingservice"
         FRONTEND = "frontend"
         LOAD_GENERATOR = "loadgenerator"
-		GITHUB_URL = "https://github.com/prabhat-roy/10-Tier-Web-App-Deployment.git"
-    }
+		}
     tools {
         jdk 'Java'
         maven 'Maven'
@@ -71,6 +71,13 @@ pipeline {
             steps {
                 script {
                     gv_script.dockerbuild()
+                }
+            }
+        }
+        stage("Trivy Image Scan") {
+            steps {
+                script {
+                    gv_script.trivyimage()
                 }
             }
         }
