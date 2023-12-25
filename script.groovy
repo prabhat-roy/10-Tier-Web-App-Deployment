@@ -104,7 +104,6 @@ def dockerscout() {
                 sh "docker scout quickview ${AD_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout quickview ${CART_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout quickview ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
-                sh "docker scout quickview ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout quickview ${EMAIL_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout quickview ${PAYMENT_SERVICE}:${BUILD_NUMBER}" 
                 sh "docker scout quickview ${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}" 
@@ -115,7 +114,6 @@ def dockerscout() {
                 sh "docker scout cves ${AD_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout cves ${CART_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout cves ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
-                sh "docker scout cves ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout cves ${EMAIL_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout cves ${PAYMENT_SERVICE}:${BUILD_NUMBER}" 
                 sh "docker scout cves ${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}" 
@@ -125,7 +123,6 @@ def dockerscout() {
                 sh "docker scout cves ${LOAD_GENERATOR}:${BUILD_NUMBER}"
                 sh "docker scout recommendations ${AD_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout recommendations ${CART_SERVICE}:${BUILD_NUMBER}"
-                sh "docker scout recommendations ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout recommendations ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout recommendations ${EMAIL_SERVICE}:${BUILD_NUMBER}"
                 sh "docker scout recommendations ${PAYMENT_SERVICE}:${BUILD_NUMBER}" 
@@ -141,7 +138,6 @@ def dockerrun() {
         docker run -dt  ${AD_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${CART_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${CURRENCY_SERVICE}:${BUILD_NUMBER}
-        docker run -dt  ${CURRENCY_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${EMAIL_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${PAYMENT_SERVICE}:${BUILD_NUMBER}
         docker run -dt  ${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}
@@ -153,7 +149,31 @@ def dockerrun() {
         '''
 }
 
-
+def dockernexus() {
+        withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexusPassword', usernameVariable: 'nexusUser')]) {
+                sh "docker image tag ${AD_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${AD_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${CART_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${CART_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${CURRENCY_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${CURRENCY_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${EMAIL_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${EMAIL_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${PAYMENT_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${PAYMENT_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${RECOMMENDATION_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${RECOMMENDATION_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${SHIPPING_SERVICE}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${SHIPPING_SERVICE}:${BUILD_NUMBER}"
+                sh "docker image tag ${FRONTEND}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${FRONTEND}:${BUILD_NUMBER}"
+                sh "docker image tag ${LOAD_GENERATOR}:${BUILD_NUMBER} ${NEXUS_IMAGE_URL}/${LOAD_GENERATOR}:${BUILD_NUMBER}"
+                sh "docker login -u ${env.nexusUser} -p ${env.nexusPassword} ${NEXUS_IMAGE_URL}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${AD_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${CART_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${CURRENCY_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${EMAIL_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${PAYMENT_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${RECOMMENDATION_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${SHIPPING_SERVICE}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${FRONTEND}:${BUILD_NUMBER}"
+                sh "docker push ${NEXUS_IMAGE_URL}/${LOAD_GENERATOR}:${BUILD_NUMBER}"
+        }
+}
 
 def removedocker() {
                 sh "docker system prune --force --all"

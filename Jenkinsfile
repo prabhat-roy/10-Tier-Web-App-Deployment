@@ -109,6 +109,13 @@ pipeline {
                 }
             }
         }
+        stage("Docker Image upload To Nexus") {
+            steps {
+                script {
+                    gv_script.dockernexus()
+                }
+            }
+        }
         stage("Container Removal") {
             steps {
                 script {
