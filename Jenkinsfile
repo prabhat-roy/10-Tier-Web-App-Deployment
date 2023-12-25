@@ -81,6 +81,34 @@ pipeline {
                 }
             }
         }
+        stage("Grype Image Scan") {
+            steps {
+                script {
+                    gv_script.grype()
+                }
+            }
+        }
+        stage("Syft Image Scan") {
+            steps {
+                script {
+                    gv_script.syft()
+                }
+            }
+        }
+        stage("Docker Scout Image Scan") {
+            steps {
+                script {
+                    gv_script.dockerscout()
+                }
+            }
+        }
+        stage("Docker Run Test") {
+            steps {
+                script {
+                    gv_script.dockerrun()
+                }
+            }
+        }
     }
     post {
         always {
