@@ -2,7 +2,7 @@ def gv_script
 pipeline {
     agent { label 'Jenkins-Agent' }
     environment {
-        NEXUS_IP = "10.0.1.9"	
+        NEXUS_IP = "10.0.1.7"	
         K8S_MASTER_IP ="10.0.1.6"
         GITHUB_URL = "https://github.com/prabhat-roy/10-Tier-Web-App-Deployment.git"        
         nexus_cred = "nexus"

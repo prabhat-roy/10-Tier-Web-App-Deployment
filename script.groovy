@@ -21,34 +21,34 @@ def trivyfs() {
 }
 
 def dockerbuild() {
-        dir('/root/workspace/10-tier-app/src/adservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/adservice') {
                 sh "docker build . -t ${AD_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/cartservice/src') {
+        dir('/home/jenkins/workspace/10-tier-app/src/cartservice/src') {
                 sh "docker build . -t ${CART_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/currencyservice') {
+        dir('/rhome/jenkins/workspace/10-tier-app/src/currencyservice') {
                 sh "docker build . -t ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/emailservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/emailservice') {
                 sh "docker build . -t ${EMAIL_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/paymentservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/paymentservice') {
                 sh "docker build . -t ${PAYMENT_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/productcatalogservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/productcatalogservice') {
                 sh "docker build . -t ${PRODUCT_CATALOG_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/recommendationservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/recommendationservice') {
                 sh "docker build . -t ${RECOMMENDATION_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/shippingservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/shippingservice') {
                 sh "docker build . -t ${SHIPPING_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/frontend') {
+        dir('/home/jenkins/workspace/10-tier-app/src/frontend') {
                 sh "docker build . -t ${FRONTEND}:${BUILD_NUMBER}"
         }
-        dir('/root/workspace/10-tier-app/src/loadgenerator') {
+        dir('/home/jenkins/workspace/10-tier-app/src/loadgenerator') {
                 sh "docker build . -t ${LOAD_GENERATOR}:${BUILD_NUMBER}"
         }
 }
