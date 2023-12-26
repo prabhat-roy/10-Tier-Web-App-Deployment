@@ -27,7 +27,7 @@ def dockerbuild() {
         dir('/home/jenkins/workspace/10-tier-app/src/cartservice/src') {
                 sh "docker build . -t ${CART_SERVICE}:${BUILD_NUMBER}"
         }
-        dir('/rhome/jenkins/workspace/10-tier-app/src/currencyservice') {
+        dir('/home/jenkins/workspace/10-tier-app/src/currencyservice') {
                 sh "docker build . -t ${CURRENCY_SERVICE}:${BUILD_NUMBER}"
         }
         dir('/home/jenkins/workspace/10-tier-app/src/emailservice') {
